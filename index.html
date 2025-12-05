@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Dancing Lantern Pizza Co. | Seneca, SC</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary-color: #ff6b35; /* Lantern Orange */
+            --secondary-color: #2c3e50; /* Dark Slate */
+            --light-bg: #f4f4f4;
+            --text-color: #333;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            background: var(--secondary-color);
+            color: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav-links a {
+            color: var(--white);
+            margin-left: 20px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            /* Placeholder image of pizza - feel free to replace URL */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.2s, background 0.3s;
+            border: 2px solid var(--primary-color);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            transform: scale(1.05);
+        }
+
+        /* --- INFO SECTION --- */
+        .info-bar {
+            background: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 20px;
+            font-weight: bold;
+        }
+
+        /* --- MENU SECTION --- */
+        .menu-section {
+            padding: 4rem 5%;
+            background: var(--light-bg);
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--secondary-color);
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+        }
+
+        .menu-category {
+            margin-bottom: 3rem;
+        }
+
+        .category-title {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+        }
+
+        .item-desc {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--secondary-color);
+            color: var(--white);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .social-links {
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            font-size: 1.8rem;
+            margin: 0 15px;
+            color: var(--white);
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* --- MOBILE TWEAKS --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            nav { flex-direction: column; gap: 10px; }
+            .nav-links { margin-top: 10px; }
+            .nav-links a { margin: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo"><i class="fas fa-fire"></i> The Dancing Lantern</div>
+        <div class="nav-links">
+            <a href="#menu">Menu</a>
+            <a href="#location">Location</a>
+            <a href="https://your-ordering-platform.com" target="_blank" style="color: var(--primary-color); font-weight: bold;">Order Now</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Lighting up Seneca's Palate</h1>
+        <p>Wood-fired pizza, craft ingredients, local soul.</p>
+        <a href="https://your-ordering-platform.com" class="cta-button">ORDER ONLINE</a>
+    </section>
+
+    <div class="info-bar">
+        Open Tuesday - Sunday | 4:00 PM - 10:00 PM
+    </div>
+
+    <section id="menu" class="menu-section">
+        <h2 class="section-title">Our Menu</h2>
+
+        <div class="menu-category">
+            <h3 class="category-title">Signature Pizzas</h3>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="item-header"><span>The Dancing Lantern</span> <span>$18</span></div>
+                    <div class="item-desc">Spicy salami, roasted red peppers, goat cheese, honey drizzle, fresh basil.</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span>Seneca Supreme</span> <span>$20</span></div>
+                    <div class="item-desc">Pepperoni, italian sausage, mushrooms, onions, bell peppers, black olives.</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span>The Margherita</span> <span>$16</span></div>
+                    <div class="item-desc">San Marzano tomato sauce, fresh mozzarella, basil, extra virgin olive oil.</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span>White Lake</span> <span>$17</span></div>
+                    <div class="item-desc">Garlic olive oil base, ricotta, mozzarella, parmesan, cracked black pepper.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-category">
+            <h3 class="category-title">Sides & Salads</h3>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="item-header"><span>Garlic Knots</span> <span>$8</span></div>
+                    <div class="item-desc">Oven-baked dough tied in knots, tossed in garlic butter and parsley.</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span>Caprese Salad</span> <span>$12</span></div>
+                    <div class="item-desc">Fresh tomatoes, mozzarella, balsamic glaze.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="location">
+        <h3>The Dancing Lantern Pizza Co.</h3>
+        <p>123 Main Street (Your Address Here)</p>
+        <p>Seneca, SC 29678</p>
+        <p>(864) 555-0123</p>
+
+        <div class="social-links">
+            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-yelp"></i></a>
+        </div>
+
+        <p>&copy; 2025 The Dancing Lantern Pizza Co.</p>
+    </footer>
+
+</body>
+</html>
