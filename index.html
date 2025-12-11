@@ -497,69 +497,105 @@
         </div>
     </footer>
 
-    <!-- QUIZ MODAL LOGIC -->
     <div id="quizModal" class="modal-overlay">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeQuiz()">&times;</span>
-            <div id="quiz-step-1">
-                <h3>Pizza Personality Quiz</h3>
-                <p>What's your vibe today?</p>
-                <button class="quiz-option" onclick="nextStep(2)">Enjoyer of Meat</button>
-                <button class="quiz-option" onclick="nextStep(2)">Veggie Delight</button>
-                <button class="quiz-option" onclick="nextStep(2)">Something Spicy</button>
-            </div>
-            
-            <div id="quiz-step-2" style="display: none;">
-                <h3>How hungry are you?</h3>
-                <button class="quiz-option" onclick="nextStep(3)">Starving!</button>
-                <button class="quiz-option" onclick="nextStep(3)">Just a snack</button>
-            </div>
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeQuiz()">&times;</span>
+        
+        <div id="quiz-step-1">
+            <h3>Pizza Personality Quiz</h3>
+            <p>What's your vibe today?</p>
+            <button class="quiz-option" onclick="chooseVibe('meat')">Enjoyer of Meat</button>
+            <button class="quiz-option" onclick="chooseVibe('veggie')">Veggie Delight</button>
+            <button class="quiz-option" onclick="chooseVibe('spicy')">Something Spicy</button>
+        </div>
+        
+        <div id="quiz-step-2" style="display: none;">
+            <h3>How hungry are you?</h3>
+            <button class="quiz-option" onclick="calculateResult('starving')">Starving!</button>
+            <button class="quiz-option" onclick="calculateResult('snack')">Just a snack</button>
+        </div>
 
-            <div id="quiz-result" style="display: none;">
-                <h3 style="color: var(--primary-color);">Perfect Match!</h3>
-                <p>Based on your choices, we recommend the <strong>Dancing Lantern Signature</strong>.</p>
-                <p>Enjoy a discount on us!</p>
-                <div class="discount-code">CODE: QUIZ10</div>
-                <p><small>Show this to your server or use online.</small></p>
-                <a href="https://your-ordering-platform.com" class="cta-button" style="display:inline-block; margin-top:10px;">Order Now</a>
-            </div>
+        <div id="quiz-result" style="display: none;">
+            <h3 style="color: var(--primary-color);">Perfect Match!</h3>
+            <p>Based on your choices, we recommend the <br><strong id="recommended-pizza" style="font-size: 1.2em;">Signature Pizza</strong>.</p>
+            
+            <p>Enjoy a discount on us!</p>
+            <div class="discount-code">CODE: QUIZ10</div>
+            <p><small>Show this to your server or use online.</small></p>
+            <a href="https://your-ordering-platform.com" class="cta-button" style="display:inline-block; margin-top:10px;">Order Now</a>
         </div>
     </div>
+</div>
 
-    <script>
-        function openQuiz() {
-            document.getElementById('quizModal').style.display = 'flex';
-            // Reset quiz
-            document.getElementById('quiz-step-1').style.display = 'block';
-            document.getElementById('quiz-step-2').style.display = 'none';
-            document.getElementById('quiz-result').style.display = 'none';
+<script>
+    // Variable to store the first choice
+    let userVibe = "";
+
+    function openQuiz() {
+        document.getElementById('quizModal').style.display = 'flex';
+        // Reset quiz UI
+        document.getElementById('quiz-step-1').style.display = 'block';
+        document.getElementById('quiz-step-2').style.display = 'none';
+        document.getElementById('quiz-result').style.display = 'none';
+        // Reset stored choice
+        userVibe = ""; 
+    }
+
+    function closeQuiz() {
+        document.getElementById('quizModal').style.display = 'none';
+    }
+
+    // Step 1 Logic: Store the vibe and show step 2
+    function chooseVibe(vibe) {
+        userVibe = vibe;
+        document.getElementById('quiz-step-1').style.display = 'none';
+        document.getElementById('quiz-step-2').style.display = 'block';
+    }
+
+    // Step 2 Logic: Take hunger level, compare with stored vibe, show result
+    function calculateResult(hunger) {
+        let pizzaResult = "";
+
+        // LOGIC MATRIX
+        if (userVibe === 'meat' && hunger === 'starving') {
+            pizzaResult = "Meat Lovers Pizza";
+        } 
+        else if (userVibe === 'meat' && hunger === 'snack') {
+            pizzaResult = "Pepperoni Pizza";
+        } 
+        else if (userVibe === 'veggie' && hunger === 'starving') {
+            pizzaResult = "Veggie Pizza";
+        } 
+        else if (userVibe === 'veggie' && hunger === 'snack') {
+            pizzaResult = "Margherita Napoli Pizza";
+        } 
+        else if (userVibe === 'spicy' && hunger === 'starving') {
+            pizzaResult = "Angry Veggie Pizza";
+        } 
+        else if (userVibe === 'spicy' && hunger === 'snack') {
+            pizzaResult = "Irritated Margherita w/ Hot Honey Pizza";
+        } 
+        else {
+            // Fallback just in case
+            pizzaResult = "Classic Cheese Pizza"; 
         }
 
-        function closeQuiz() {
-            document.getElementById('quizModal').style.display = 'none';
-        }
+        // Inject text into the HTML
+        document.getElementById('recommended-pizza').textContent = pizzaResult;
 
-        function nextStep(step) {
-            // Hide all steps
-            document.getElementById('quiz-step-1').style.display = 'none';
-            document.getElementById('quiz-step-2').style.display = 'none';
-            
-            // Show requested step
-            if(step === 2) {
-                document.getElementById('quiz-step-2').style.display = 'block';
-            } else if (step === 3) {
-                document.getElementById('quiz-result').style.display = 'block';
-            }
-        }
+        // Hide step 2, show result
+        document.getElementById('quiz-step-2').style.display = 'none';
+        document.getElementById('quiz-result').style.display = 'block';
+    }
 
-        // Close modal if clicking outside
-        window.onclick = function(event) {
-            let modal = document.getElementById('quizModal');
-            if (event.target == modal) {
-                closeQuiz();
-            }
+    // Close modal if clicking outside
+    window.onclick = function(event) {
+        let modal = document.getElementById('quizModal');
+        if (event.target == modal) {
+            closeQuiz();
         }
-    </script>
+    }
+</script>
 
 </body>
 </html>
