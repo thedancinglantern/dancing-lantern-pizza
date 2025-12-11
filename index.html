@@ -12,11 +12,14 @@
     <style>
         /* --- CSS VARIABLES & RESET --- */
         :root {
-            --primary-color: #ff6b35; /* Lantern Orange */
-            --secondary-color: #2c3e50; /* Dark Slate */
-            --light-bg: #f4f4f4;
-            --text-color: #333;
+            /* Updated Color Palette */
+            --primary-color: #1e4d2b; /* Dark Green */
+            --accent-orange: #c05832; /* Rustic Brick Orange */
+            --wood-brown: #5d4037;    /* Hardwood Floor Brown */
+            --light-bg: #fdf5e6;      /* Off-white/parchment */
+            --text-color: #2b2b2b;
             --white: #ffffff;
+            --overlay-bg: rgba(30, 77, 43, 0.95);
         }
 
         * {
@@ -29,6 +32,7 @@
             font-family: 'Open Sans', sans-serif;
             line-height: 1.6;
             color: var(--text-color);
+            background-color: var(--light-bg);
         }
 
         h1, h2, h3 {
@@ -43,7 +47,7 @@
 
         /* --- NAVIGATION --- */
         nav {
-            background: var(--secondary-color);
+            background: var(--primary-color);
             color: var(--white);
             padding: 1rem 5%;
             display: flex;
@@ -52,31 +56,40 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-bottom: 4px solid var(--wood-brown);
         }
 
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
-            color: var(--primary-color);
+            color: #e8f5e9; /* Light green tint for logo text */
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--accent-orange);
         }
 
         .nav-links a {
             color: var(--white);
             margin-left: 20px;
             transition: color 0.3s;
+            font-weight: 600;
         }
 
         .nav-links a:hover {
-            color: var(--primary-color);
+            color: var(--accent-orange);
         }
 
         /* --- HERO SECTION --- */
         .hero {
-            /* Placeholder image of pizza - feel free to replace URL */
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.7)), url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
-            height: 80vh;
+            height: 85vh; /* Slightly taller to accommodate new button */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -95,31 +108,68 @@
         .hero p {
             font-size: 1.5rem;
             margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
         }
 
         .cta-button {
-            background: var(--primary-color);
+            background: var(--accent-orange);
             color: var(--white);
-            padding: 15px 30px;
-            border-radius: 50px;
+            padding: 15px 40px;
+            border-radius: 4px; /* More rustic/boxy look */
             font-size: 1.2rem;
             font-weight: bold;
             transition: transform 0.2s, background 0.3s;
-            border: 2px solid var(--primary-color);
+            border: 2px solid var(--accent-orange);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 300px;
         }
 
         .cta-button:hover {
-            background: transparent;
-            transform: scale(1.05);
+            background: #a04020;
+            border-color: #a04020;
+            transform: translateY(-2px);
         }
 
-        /* --- INFO SECTION --- */
+        .quiz-button {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+            padding: 15px 40px;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            cursor: pointer;
+            width: 100%;
+            max-width: 300px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .quiz-button:hover {
+            background: var(--white);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* --- INFO BAR --- */
         .info-bar {
-            background: var(--primary-color);
+            background: var(--wood-brown);
             color: var(--white);
             text-align: center;
             padding: 20px;
             font-weight: bold;
+            border-bottom: 4px solid var(--accent-orange);
         }
 
         /* --- MENU SECTION --- */
@@ -130,9 +180,11 @@
 
         .section-title {
             text-align: center;
-            color: var(--secondary-color);
+            color: var(--primary-color);
             margin-bottom: 3rem;
             font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .menu-category {
@@ -140,10 +192,11 @@
         }
 
         .category-title {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--secondary-color);
+            color: var(--wood-brown);
+            border-bottom: 3px solid var(--accent-orange);
             display: inline-block;
             margin-bottom: 1.5rem;
+            padding-bottom: 5px;
         }
 
         .menu-grid {
@@ -155,8 +208,14 @@
         .menu-item {
             background: var(--white);
             padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            border-left: 5px solid var(--primary-color); /* Green accent on cards */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
         }
 
         .item-header {
@@ -165,61 +224,192 @@
             margin-bottom: 0.5rem;
             font-weight: bold;
             font-size: 1.2rem;
-            color: var(--secondary-color);
+            color: var(--wood-brown);
         }
 
         .item-desc {
-            font-size: 0.9rem;
-            color: #666;
+            font-size: 0.95rem;
+            color: #555;
         }
 
-        /* --- FOOTER --- */
-        footer {
-            background: var(--secondary-color);
-            color: var(--white);
-            padding: 3rem 5%;
+        /* --- CAREERS SECTION --- */
+        .careers-section {
+            background: var(--primary-color);
+            color: white;
+            padding: 4rem 5%;
             text-align: center;
         }
 
+        .careers-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .apply-btn {
+            display: inline-block;
+            margin-top: 20px;
+            background: var(--white);
+            color: var(--primary-color);
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .apply-btn:hover {
+            background: var(--accent-orange);
+            color: white;
+        }
+
+        /* --- FOOTER & LOCATION --- */
+        footer {
+            background: var(--wood-brown);
+            color: var(--white);
+            padding: 3rem 5%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .footer-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .footer-map {
+            flex: 1;
+            min-width: 300px;
+            height: 250px;
+            border: 4px solid var(--white);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .footer-map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
         .social-links {
-            margin: 2rem 0;
+            margin: 1.5rem 0;
         }
 
         .social-links a {
             font-size: 1.8rem;
-            margin: 0 15px;
+            margin-right: 20px;
             color: var(--white);
             transition: color 0.3s;
         }
 
         .social-links a:hover {
-            color: var(--primary-color);
+            color: var(--accent-orange);
+        }
+
+        /* --- QUIZ MODAL --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            border-top: 10px solid var(--accent-orange);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--wood-brown);
+        }
+
+        .quiz-option {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            background: var(--light-bg);
+            border: 2px solid var(--wood-brown);
+            color: var(--wood-brown);
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .quiz-option:hover {
+            background: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+
+        .discount-code {
+            background: var(--accent-orange);
+            color: white;
+            padding: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 20px 0;
+            border-radius: 4px;
+            border: 2px dashed white;
         }
 
         /* --- MOBILE TWEAKS --- */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
-            nav { flex-direction: column; gap: 10px; }
-            .nav-links { margin-top: 10px; }
-            .nav-links a { margin: 0 10px; }
+            nav { flex-direction: column; gap: 15px; padding-bottom: 15px;}
+            .nav-links { 
+                display: flex; 
+                flex-direction: column; 
+                align-items: center; 
+                gap: 10px;
+                margin-left: 0;
+            }
+            .nav-links a { margin: 0; }
+            footer { text-align: center; }
+            .footer-info, .footer-map { flex: 100%; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo"><i class="fas fa-fire"></i> The Dancing Lantern</div>
+        <div class="logo"><i class="fas fa-pizza-slice"></i> The Dancing Lantern</div>
         <div class="nav-links">
             <a href="#menu">Menu</a>
+            <a href="#careers">Careers</a>
             <a href="#location">Location</a>
-            <a href="https://your-ordering-platform.com" target="_blank" style="color: var(--primary-color); font-weight: bold;">Order Now</a>
+            <a href="https://your-ordering-platform.com" target="_blank" style="color: var(--accent-orange); font-weight: bold; background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 20px;">Order Now</a>
         </div>
     </nav>
 
     <section class="hero">
-        <h1>Lighting up Seneca's Palate</h1>
-        <p>Wood-fired pizza, craft ingredients, local soul.</p>
-        <a href="https://your-ordering-platform.com" class="cta-button">ORDER ONLINE</a>
+        <h1>Rustic Soul. Local Flavor.</h1>
+        <p>Wood-fired pizza handcrafted in the heart of Seneca.</p>
+        
+        <div class="button-group">
+            <a href="https://your-ordering-platform.com" class="cta-button">Order Online</a>
+            <button onclick="openQuiz()" class="quiz-button"><i class="fas fa-question-circle"></i> Find Your Pizza</button>
+        </div>
     </section>
 
     <div class="info-bar">
@@ -241,8 +431,8 @@
                     <div class="item-desc">Pepperoni, italian sausage, mushrooms, onions, bell peppers, black olives.</div>
                 </div>
                 <div class="menu-item">
-                    <div class="item-header"><span>The Margherita</span> <span>$16</span></div>
-                    <div class="item-desc">San Marzano tomato sauce, fresh mozzarella, basil, extra virgin olive oil.</div>
+                    <div class="item-header"><span>The Rustic Margherita</span> <span>$16</span></div>
+                    <div class="item-desc">San Marzano tomato sauce, fresh mozzarella, basil, extra virgin olive oil, garlic.</div>
                 </div>
                 <div class="menu-item">
                     <div class="item-header"><span>White Lake</span> <span>$17</span></div>
@@ -255,31 +445,113 @@
             <h3 class="category-title">Sides & Salads</h3>
             <div class="menu-grid">
                 <div class="menu-item">
-                    <div class="item-header"><span>Garlic Knots</span> <span>$8</span></div>
-                    <div class="item-desc">Oven-baked dough tied in knots, tossed in garlic butter and parsley.</div>
+                    <div class="item-header"><span>Hearth-Baked Knots</span> <span>$8</span></div>
+                    <div class="item-desc">Oven-baked dough tied in knots, tossed in garlic butter and fresh parsley.</div>
                 </div>
                 <div class="menu-item">
-                    <div class="item-header"><span>Caprese Salad</span> <span>$12</span></div>
-                    <div class="item-desc">Fresh tomatoes, mozzarella, balsamic glaze.</div>
+                    <div class="item-header"><span>Brick Oven Caprese</span> <span>$12</span></div>
+                    <div class="item-desc">Fresh tomatoes, mozzarella, balsamic glaze, served with warm bread.</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer id="location">
-        <h3>The Dancing Lantern Pizza Co.</h3>
-        <p>123 Main Street (Your Address Here)</p>
-        <p>Seneca, SC 29678</p>
-        <p>(864) 555-0123</p>
+    <section id="careers" class="careers-section">
+        <div class="careers-content">
+            <h2>Join Our Team</h2>
+            <p>We are looking for passionate people to join our kitchen and service crew. If you love pizza and great company, we want to hear from you!</p>
+            <a href="#apply" onclick="alert('Application form coming soon! Please call us or stop by.')" class="apply-btn">Apply Now</a>
+        </div>
+    </section>
 
-        <div class="social-links">
-            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-yelp"></i></a>
+    <footer id="location">
+        <div class="footer-info">
+            <h3>The Dancing Lantern Pizza Co.</h3>
+            <p><i class="fas fa-map-marker-alt" style="color: var(--accent-orange)"></i> 123 Main Street</p>
+            <p>Seneca, SC 29678</p>
+            <p><i class="fas fa-phone" style="color: var(--accent-orange)"></i> (864) 555-0123</p>
+
+            <div class="social-links">
+                <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-yelp"></i></a>
+            </div>
+            <p>&copy; 2025 The Dancing Lantern Pizza Co.</p>
         </div>
 
-        <p>&copy; 2025 The Dancing Lantern Pizza Co.</p>
+        <div class="footer-map">
+            <!-- Google Maps Embed for Seneca, SC -->
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52655.22856519448!2d-82.99047936873516!3d34.6853763660505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88585093112d7d59%3A0xc665e08611100067!2sSeneca%2C%20SC!5e0!3m2!1sen!2sus!4v1647895000000!5m2!1sen!2sus" 
+                allowfullscreen="" 
+                loading="lazy">
+            </iframe>
+        </div>
     </footer>
+
+    <!-- QUIZ MODAL LOGIC -->
+    <div id="quizModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeQuiz()">&times;</span>
+            <div id="quiz-step-1">
+                <h3>Pizza Personality Quiz</h3>
+                <p>What's your vibe today?</p>
+                <button class="quiz-option" onclick="nextStep(2)">Meat Lover</button>
+                <button class="quiz-option" onclick="nextStep(2)">Veggie Delight</button>
+                <button class="quiz-option" onclick="nextStep(2)">Something Spicy</button>
+            </div>
+            
+            <div id="quiz-step-2" style="display: none;">
+                <h3>How hungry are you?</h3>
+                <button class="quiz-option" onclick="nextStep(3)">Starving!</button>
+                <button class="quiz-option" onclick="nextStep(3)">Just a snack</button>
+            </div>
+
+            <div id="quiz-result" style="display: none;">
+                <h3 style="color: var(--primary-color);">Perfect Match!</h3>
+                <p>Based on your choices, we recommend the <strong>Dancing Lantern Signature</strong>.</p>
+                <p>Enjoy a discount on us!</p>
+                <div class="discount-code">CODE: PIZZA10</div>
+                <p><small>Show this to your server or use online.</small></p>
+                <a href="https://your-ordering-platform.com" class="cta-button" style="display:inline-block; margin-top:10px;">Order Now</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openQuiz() {
+            document.getElementById('quizModal').style.display = 'flex';
+            // Reset quiz
+            document.getElementById('quiz-step-1').style.display = 'block';
+            document.getElementById('quiz-step-2').style.display = 'none';
+            document.getElementById('quiz-result').style.display = 'none';
+        }
+
+        function closeQuiz() {
+            document.getElementById('quizModal').style.display = 'none';
+        }
+
+        function nextStep(step) {
+            // Hide all steps
+            document.getElementById('quiz-step-1').style.display = 'none';
+            document.getElementById('quiz-step-2').style.display = 'none';
+            
+            // Show requested step
+            if(step === 2) {
+                document.getElementById('quiz-step-2').style.display = 'block';
+            } else if (step === 3) {
+                document.getElementById('quiz-result').style.display = 'block';
+            }
+        }
+
+        // Close modal if clicking outside
+        window.onclick = function(event) {
+            let modal = document.getElementById('quizModal');
+            if (event.target == modal) {
+                closeQuiz();
+            }
+        }
+    </script>
 
 </body>
 </html>
